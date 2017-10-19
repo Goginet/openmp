@@ -39,6 +39,7 @@ int main(int args, char **argc)
 
     code = create_matrix(&matrix_c, rows, rows);
 
+#pragma omp parallel
 #pragma omp for
     for (int i = 0; i < rows; i++)
     {
@@ -49,7 +50,7 @@ int main(int args, char **argc)
 #pragma omp for
             for (int k = 0; k < rows; k++)
             {
-                sum += matrix_a[i][k] * matrix_a[k][j];
+                sum += matrix_a[i][k] * matrix_b[k][j];
             }
             matrix_c[i][j] = sum;
         }
